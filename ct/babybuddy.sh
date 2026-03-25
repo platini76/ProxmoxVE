@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
 # Copyright (c) 2021-2026 tteck
-# Author: tteck (tteckster)
+# Author: tteck (tteckster) | Davide Alessio
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://bambuddy.cool/
 
@@ -30,12 +30,10 @@ function update_script() {
   msg_info "Updating ${APP} LXC"
   $STD apt-get update
   $STD apt-get -y upgrade
-  if command -v docker >/dev/null 2>&1; then
-    msg_info "Updating Bambuddy containers"
-    cd /opt/bambuddy
-    $STD docker compose pull
-    $STD docker compose up -d
-  fi
+  msg_info "Updating Bambuddy"
+  cd /opt/bambuddy
+  $STD docker compose pull
+  $STD docker compose up -d
   msg_ok "Updated ${APP} LXC"
   msg_ok "Updated successfully!"
   exit
@@ -57,12 +55,10 @@ $STD apt-get update
 $STD apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 $STD systemctl enable --now docker
 
-msg_info "Downloading Bambuddy"
+msg_info "Deploying Bambuddy"
 $STD mkdir -p /opt/bambuddy
 cd /opt/bambuddy
 $STD curl -fsSL https://raw.githubusercontent.com/maziggy/bambuddy/main/docker-compose.yml -o docker-compose.yml
-
-msg_info "Starting Bambuddy"
 $STD docker compose up -d
 
 msg_ok "Completed successfully!\n"
