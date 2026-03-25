@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
 # Copyright (c) 2021-2026 tteck
-# Author: tteck (tteckster) | Davide Alessio
+# Author: tteck (tteckster)
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
-# Source: https://bambuddy.cool/
+# Source: https://github.com/maziggy/bambuddy
 
 APP="Bambuddy"
 var_tags="${var_tags:-cloud}"
